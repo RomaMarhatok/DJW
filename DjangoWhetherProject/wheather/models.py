@@ -7,7 +7,7 @@ class WheatherMixin(models.Model):
         "Wind direction as 16 point compass",
         max_length=10,
     )
-    wind_degrees = models.FloatField("wind direction in degrees")
+    wind_degree = models.FloatField("wind direction in degrees")
     precip_mm = models.FloatField("precipitation amount in millimeters")
     feelslike_c = models.FloatField("feels like temperature as celcius")
     created_at = models.DateTimeField(auto_now_add=True)
