@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 
 class WheatherMixin(models.Model):
@@ -27,11 +28,18 @@ class WheatherConditionMixin(models.Model):
 
 class City(models.Model):
     name = models.CharField("name", max_length=200)
+    slug = models.SlugField(
+        verbose_name="slug for city name", max_length=200, unique=True, blank=True
+    )
     created_at = models.DateTimeField("created at", auto_now_add=True)
     updated_at = models.DateTimeField("updated at", auto_now=True)
 
     class Meta:
         db_table = "cities"
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(City, self).save(*args, **kwargs)
 
 
 class DayCityWheather(WheatherMixin, WheatherConditionMixin):
