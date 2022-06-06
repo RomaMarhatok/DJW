@@ -1,12 +1,13 @@
 from rest_framework import serializers
 from wheather.models import City, DayCityWheather, HoursDayWheather
 from datetime import datetime
+from django.template.defaultfilters import slugify
 
 
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = City
-        exclude = ["updated_at", "created_at"]
+        fields = ["name", "slug"]
 
 
 class DayCityWheatherSerializer(serializers.ModelSerializer):
