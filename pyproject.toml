@@ -22,6 +22,9 @@ flake8-builtins = "^1.5.3"
 pep8-naming = "^0.12.1"
 flake8-variables-names = "^0.0.5"
 autopep8 = "^1.6.0"
+pytest-cov = "^3.0.0"
+pytest-django = "^4.5.2"
+pytest-factoryboy = "^2.4.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
