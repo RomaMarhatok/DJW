@@ -1,7 +1,7 @@
 from pydantic import BaseSettings
 
 
-class ApiConstant(BaseSettings):
+class WheatherApiConstant(BaseSettings):
     WHEATHER_API_KEY: str
     BASE_WHEATHER_API_URL: str
 
