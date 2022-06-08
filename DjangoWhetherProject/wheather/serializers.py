@@ -5,6 +5,11 @@ from django.template.defaultfilters import slugify
 
 
 class CitySerializer(serializers.ModelSerializer):
+    def __init__(self, instance=None, data=..., **kwargs):
+        if "slug" not in data.keys() and "name" in data and type(data) == dict:
+            data.update({"slug": slugify(data["name"])})
+        super().__init__(instance, data, **kwargs)
+
     class Meta:
         model = City
         fields = ["name", "slug"]
@@ -21,16 +26,17 @@ class HourDayWheatherSerializer(serializers.ModelSerializer):
         model = HoursDayWheather
         exclude = ["updated_at", "created_at"]
 
-    def get_hours(self, str_date: str) -> int | None:
+    def get_hours(self, str_date: str) -> int or None:
         try:
             full_date_format = "%Y-%m-%d %H:%M"
-            hour_format = "%H:%M"
+            only_hour_format = "%H:%M"
             if self.__validate(str_date, full_date_format):
                 return datetime.strptime(str_date, full_date_format).hour
             else:
-                return datetime.strptime(str_date, hour_format).hour
-
+                return datetime.strptime(str_date, only_hour_format).hour
         except ValueError:
+            return None
+        except TypeError:
             return None
 
     def __validate(self, str_date, format_str) -> bool:
