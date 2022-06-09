@@ -1,10 +1,13 @@
 import pytest
-from faker import Faker
-from django.template.defaultfilters import slugify
 from pytest_factoryboy import register
+from wheather.tests.factories import (
+    CityFactory,
+    DayFactory,
+    HourFactory,
+)
+from django.template.defaultfilters import slugify
+from faker import Faker
 from wheather.models import DayCityWheather, HoursDayWheather, City
-from wheather.tests.factories import CityFactory, DayFactory, HourFactory
-
 
 register(CityFactory)
 register(DayFactory)
